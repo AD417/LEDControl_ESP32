@@ -23,6 +23,6 @@ protected:
     unsigned long frameInterval = 0;
 
     bool interrupt = false;
-    CRGB dark_color = CRGB::Black;
+    CRGB darkColor = CRGB::Black;
     unsigned long start_time = millis();
 };

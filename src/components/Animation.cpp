@@ -3,9 +3,12 @@
 // Animation.cpp
 #include "Animation.hpp"
 
-Animation::Animation(CRGB color, unsigned long frameInterval) {
+Animation::Animation(CRGB color) {
     this->color = color;
-    this-> frameInterval = frameInterval;
+}
+
+Animation::Animation(CRGB::HTMLColorCode color) {
+    this->color = color;
 }
 
 double Animation::frame() {
@@ -35,5 +38,5 @@ Animation *Animation::nextAnimation() {
 }
 
 String Animation::toString() {
-    return "An undocumented animation";
+    return "an undocumented animation";
 }

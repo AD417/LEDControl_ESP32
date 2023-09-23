@@ -1,11 +1,12 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#define NUM_LEDS 60
-// put function declarations here:
-int myFunction(int, int);
+#include "Animations/FillAnimation.hpp"
+#include "components/Animation.hpp"
+
+#define NUM_LEDS 100
 CRGB leds[NUM_LEDS];
-int itr = 0;
+Animation *anim = new FillAnimation(CRGB::Red);
 
 void setup() {
   // put your setup code here, to run once:
@@ -16,16 +17,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  itr++;
-  for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = (i + itr) % 2 == 0 ? CRGB::Red : CRGB::Blue;
-  }
+  anim->updateColorTo(CRGB::Magenta);
+  anim->applyTo(leds, NUM_LEDS);
   FastLED.show();
   Serial.println("ON!");
-  delay(250);
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  delay(1000);
+  anim->updateColorTo(CRGB::Black);
+  anim->applyTo(leds, NUM_LEDS);
+  FastLED.show();
+  Serial.println("OFF!");
+  delay(1000);
 }

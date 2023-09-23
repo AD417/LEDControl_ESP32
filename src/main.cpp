@@ -18,7 +18,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   Program::anim->applyTo(Program::leds, NUM_LEDS);
   FastLED.show();
 
@@ -27,9 +26,11 @@ void loop() {
     Serial.readStringUntil('\n');
     Serial.flush();
     Serial.print("Testcat!");
-    // delete Program::anim;
-    Program::anim = new AlternatingAnimation(CRGB::Red, 500);
+    // Memory safety. Use a unique_ptr when possible; this does for now.
+    delete Program::anim;
+    Program::anim = new WaveAnimation(CRGB::Red, 500);
   }
 
+  // Ideally 100fps
   delay(10);
 }

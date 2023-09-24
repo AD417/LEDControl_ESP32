@@ -174,11 +174,7 @@ void pulseCallback(cmd* commandPointer) {
     } else {
         delete Program::anim;
     }
-
-    delete Program::anim;
     Program::anim = nextAnimation;
-
-
 }
 
 void waveCallback(cmd* commandPointer) {
@@ -215,8 +211,6 @@ void waveCallback(cmd* commandPointer) {
     } else {
         delete Program::anim;
     }
-
-    delete Program::anim;
     Program::anim = nextAnimation;
 }
 

@@ -7,6 +7,7 @@
 #include "Program.h"
 #include "Animations/AlternatingAnimation.hpp"
 #include "Animations/FillAnimation.hpp"
+#include "Animations/KillAnimation.hpp"
 #include "Animations/PulseAnimation.hpp"
 #include "Animations/WaveAnimation.hpp"
 
@@ -70,6 +71,13 @@ void fillCallback(cmd* commandPointer) {
         Program::color
     );
     // TRANSITION!!!
+
+    delete Program::anim;
+    Program::anim = nextAnimation;
+}
+
+void killCallback(cmd* commandPointer) {
+    Animation * nextAnimation = new KillAnimation();
 
     delete Program::anim;
     Program::anim = nextAnimation;

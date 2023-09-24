@@ -8,7 +8,8 @@ SimpleCLI commandLine;
 Command altCommand = commandLine.addCommand("alt/ernate", altCallback);
 Command colorCommand = commandLine.addCommand("c/olor", colorCallback);
 Command echoCommand = commandLine.addBoundlessCmd("echo", echoCallback);
-Command fillCommand = commandLine.addCommand("fill,on", fillCallback);  
+Command fillCommand = commandLine.addCommand("fill,on", fillCallback);
+Command killCommand = commandLine.addCommand("kill/off", killCallback);
 Command pulseCommand = commandLine.addCommand("pulse", pulseCallback);
 Command waveCommand = commandLine.addCommand("wave", waveCallback);
 

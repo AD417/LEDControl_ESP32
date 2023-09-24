@@ -2,10 +2,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "Animations/AlternatingAnimation.hpp"
-#include "Animations/FillAnimation.hpp"
-#include "Animations/PulseAnimation.hpp"
-#include "Animations/WaveAnimation.hpp"
+#include "Animations/KillAnimation.hpp"
 #include "CommandLine/CommandLine.hpp"
 #include "CommandLine/colors.hpp"
 #include "components/Animation.hpp"
@@ -15,7 +12,7 @@ void setup() {
   // put your setup code here, to run once:
   FastLED.addLeds<WS2811, 12, BRG>(Program::leds, NUM_LEDS);
   Serial.begin(9600);
-  Program::anim = new FillAnimation(CRGB::Black);
+  Program::anim = new KillAnimation();
   initColors();
   initCommandLine();
   delay(500);

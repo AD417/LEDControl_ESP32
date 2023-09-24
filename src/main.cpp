@@ -6,6 +6,7 @@
 #include "CommandLine/CommandLine.hpp"
 #include "CommandLine/colors.hpp"
 #include "components/Animation.hpp"
+#include "Server/server.hpp"
 #include "Program.h"
 
 void setup() {
@@ -15,6 +16,7 @@ void setup() {
   Program::anim = new KillAnimation();
   initColors();
   initCommandLine();
+  initServer();
   delay(500);
 }
 

@@ -4,7 +4,7 @@
 #include "CommandLine/CommandLine.hpp"
 #include "Program.h"
 
-const char* ssid = "ESP32";
+const char* ssid = "LED_REMOTE";
 
 AsyncWebServer server(80);
 
@@ -27,7 +27,7 @@ void initServer() {
     "  <title>LEDControl remote CLI</title>\n"
     "</head>\n"
     "<body>\n"
-    "  <h1>Remote CLI</h1>\n"
+    "  <h1>LED Remote CLI</h1>\n"
     "  <form action=\"/run\" method=\"get\">\n"
     "    <label for=\"cmd\">Enter a command:</label>\n"
     "    <input type=\"text\" id=\"cmd\" name=\"cmd\" required>\n"
@@ -41,10 +41,7 @@ void initServer() {
   server.on("/run", HTTP_GET, [](AsyncWebServerRequest *request){
     if (request->hasParam("cmd")) {
       String cmd = request->getParam("cmd")->value();
-      // Execute the command (replace with your command execution logic)
-      // For example, you can use the execCommand function here
-      Serial.println("Command received: " + cmd);
-      // Echo the user input
+
       Serial.print("# ");
       Serial.println(cmd);
 

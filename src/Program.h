@@ -18,6 +18,8 @@ extern CRGB color;
 extern CRGB flashColor;
 
 extern bool isInterrupted;
+extern bool isRecursive;
+extern String command;
 
 // </namespace Program>
 }

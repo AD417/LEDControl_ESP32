@@ -32,6 +32,10 @@ void loop() {
   if (Serial.available()) {
     // Read out string from the serial monitor
     String input = Serial.readStringUntil('\n');
+    if (Program::isRecursive) {
+      if (input.length() == 0) input = Program::command;
+      else Program::isRecursive = false;
+    }
 
     // Echo the user input
     Serial.print("# ");
@@ -39,6 +43,9 @@ void loop() {
 
     // Parse the user input into the CLI
     commandLine.parse(input);
+    if (Program::isRecursive) {
+      Program::command = input;
+    }
   }
 
   if (commandLine.errored()) {

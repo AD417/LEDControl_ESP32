@@ -9,5 +9,7 @@ CRGB color = CRGB::White;
 CRGB flashColor = CRGB::Red;
 
 bool isInterrupted = false;
+bool isRecursive = false;
+String command = "";
 
 }

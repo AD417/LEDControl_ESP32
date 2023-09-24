@@ -35,7 +35,7 @@ void initCommandLine() {
     flashCommand.addPositionalArgument("duration", "500");
     flashCommand.addArgument("c,color", "");
     flashCommand.addFlagArgument("k/ill");
-    // RECURSION!
+    flashCommand.addFlagArgument("r/ecursive");
 
     killCommand.addArgument("t/ransition", "0");
 

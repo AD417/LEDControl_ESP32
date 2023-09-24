@@ -103,6 +103,7 @@ void flashCallback(cmd* commandPointer) {
     unsigned long duration = cmd.getArg("duration").getValue().toInt();
     String colorString = cmd.getArg("color").getValue();
     bool killAfter = cmd.getArg("kill").isSet();
+    bool recursive = cmd.getArg("recursive").isSet();
 
     Program::flashColor = getColorFromString(colorString, true);
 
@@ -122,6 +123,7 @@ void flashCallback(cmd* commandPointer) {
 
     Program::anim = flashAnim;
     Program::isInterrupted = true;
+    Program::isRecursive = recursive;
 }
 
 void killCallback(cmd* commandPointer) {

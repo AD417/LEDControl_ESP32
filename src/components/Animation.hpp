@@ -7,12 +7,13 @@
 class Animation
 {
 public:
+    Animation();
     Animation(CRGB color);
     Animation(CRGB::HTMLColorCode color);
 
     double frame();
     int frameDiscrete();
-    void updateColorTo(CRGB new_color);
+    virtual void updateColorTo(CRGB newColor);
     virtual bool isComplete();
     virtual Animation *nextAnimation();
     virtual void applyTo(CRGB strip[], int len) = 0;
@@ -24,5 +25,5 @@ protected:
 
     bool interrupt = false;
     CRGB darkColor = CRGB::Black;
-    unsigned long start_time = millis();
+    unsigned long startTime = millis();
 };

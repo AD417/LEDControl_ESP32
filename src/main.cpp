@@ -6,6 +6,8 @@
 #include "Animations/FillAnimation.hpp"
 #include "Animations/PulseAnimation.hpp"
 #include "Animations/WaveAnimation.hpp"
+#include "CommandLine/CommandLine.hpp"
+#include "CommandLine/colors.hpp"
 #include "components/Animation.hpp"
 #include "Program.h"
 
@@ -14,6 +16,8 @@ void setup() {
   FastLED.addLeds<WS2811, 12, BRG>(Program::leds, NUM_LEDS);
   Serial.begin(9600);
   Program::anim = new FillAnimation(CRGB::Black);
+  initColors();
+  initCommandLine();
   delay(500);
 }
 
@@ -22,13 +26,28 @@ void loop() {
   FastLED.show();
 
   if (Serial.available()) {
-    // NOTE: Must be UNTIL, else it times out waiting for string parsing.
-    Serial.readStringUntil('\n');
-    Serial.flush();
-    Serial.print("Testcat!");
-    // Memory safety. Use a unique_ptr when possible; this does for now.
-    delete Program::anim;
-    Program::anim = new WaveAnimation(CRGB::Red, 500);
+    // Read out string from the serial monitor
+    String input = Serial.readStringUntil('\n');
+
+    // Echo the user input
+    Serial.print("# ");
+    Serial.println(input);
+
+    // Parse the user input into the CLI
+    commandLine.parse(input);
+  }
+
+  if (commandLine.errored()) {
+    CommandError cmdError = commandLine.getError();
+
+    Serial.print("ERROR: ");
+    Serial.println(cmdError.toString());
+
+    if (cmdError.hasCommand()) {
+      Serial.print("Did you mean \"");
+      Serial.print(cmdError.getCommand().toString());
+      Serial.println("\"?");
+    }
   }
 
   // Ideally 100fps

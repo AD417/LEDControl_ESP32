@@ -1,19 +1,20 @@
+#pragma once
+
 #define NUM_LEDS 100
 
 #include <memory>
 #include <FastLED.h>
+#include <SimpleCLI.h>
 
 #include "components/Animation.hpp"
 
 namespace Program {
 
-bool isRunning = true;
-Animation* anim;
-CRGB leds[NUM_LEDS];
+// bool isRunning = true;
+extern Animation* anim;
+extern CRGB leds[NUM_LEDS];
 
-CRGB color = CRGB::White;
-
-
+extern CRGB color;
 
 
 // </namespace Program>

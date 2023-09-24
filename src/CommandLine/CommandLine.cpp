@@ -22,25 +22,30 @@ void initCommandLine() {
     altCommand.addPositionalArgument("interval", "500");
     altCommand.addPositionalArgument("width", "5");
     altCommand.addArgument("c,color", "");
-    // TRANSITION!
+    altCommand.addArgument("t/ransition", "0");
 
     colorCommand.addPositionalArgument("color");
+    colorCommand.addArgument("t/ransition", "0");
     // FLASH!
     // TRANSITION!?
 
     fillCommand.addArgument("c,color", "");
-    // TRANSITION!
+    fillCommand.addArgument("t/ransition", "0");
 
     flashCommand.addPositionalArgument("duration", "500");
     flashCommand.addArgument("c,color", "");
     flashCommand.addFlagArgument("k/ill");
     // RECURSION!
 
+    killCommand.addArgument("t/ransition", "0");
+
     pulseCommand.addPositionalArgument("interval", "500");
     pulseCommand.addArgument("c,color", "");
+    pulseCommand.addArgument("t/ransition", "0");
     // TRANSITION!
 
     waveCommand.addPositionalArgument("interval", "500");
     waveCommand.addPositionalArgument("wavelength", "5.0");
     waveCommand.addArgument("c,color", "");
+    waveCommand.addArgument("t/ransition", "0");
 }

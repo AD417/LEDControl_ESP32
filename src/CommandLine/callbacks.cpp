@@ -10,6 +10,7 @@
 #include "Animations/FlashAnimation.hpp"
 #include "Animations/KillAnimation.hpp"
 #include "Animations/PulseAnimation.hpp"
+#include "Animations/TransitionAnimation.hpp"
 #include "Animations/WaveAnimation.hpp"
 
 void altCallback(cmd* commandPointer) {
@@ -18,13 +19,14 @@ void altCallback(cmd* commandPointer) {
     Argument intArg = cmd.getArg("interval");
     Argument widthArg = cmd.getArg("width");
     Argument colorArg = cmd.getArg("color");
+    Argument transArg = cmd.getArg("transition");
 
-    unsigned long interval = intArg.getValue().toInt();
-    int width =              widthArg.getValue().toInt();
-    String colorString =     colorArg.getValue();
+    unsigned long interval =   intArg.getValue().toInt();
+    int width =                widthArg.getValue().toInt();
+    String colorString =       colorArg.getValue();
+    unsigned long transition = transArg.getValue().toInt();
 
     Program::color = getColorFromString(colorString);
-    // TRANSITION!
 
     if (interval < 50) interval = 500;
     if (width < 2) width = 2;
@@ -34,9 +36,17 @@ void altCallback(cmd* commandPointer) {
         interval,
         width
     );
-    // TRANSITION!!!!
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
 
-    delete Program::anim;
     Program::anim = nextAnimation;
 }
 
@@ -65,15 +75,25 @@ void fillCallback(cmd* commandPointer) {
     Command cmd(commandPointer);
 
     String colorString = cmd.getArg("color").getValue();
+    unsigned long transition = cmd.getArg("transition").getValue().toInt();
 
     Program::color = getColorFromString(colorString);
 
     Animation * nextAnimation = new FillAnimation(
         Program::color
     );
-    // TRANSITION!!!
 
-    delete Program::anim;
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
+
     Program::anim = nextAnimation;
 }
 
@@ -105,9 +125,21 @@ void flashCallback(cmd* commandPointer) {
 }
 
 void killCallback(cmd* commandPointer) {
-    Animation * nextAnimation = new KillAnimation();
+    Command cmd(commandPointer);
 
-    delete Program::anim;
+    unsigned long transition = cmd.getArg("transition").getValue().toInt();
+
+    Animation * nextAnimation = new KillAnimation();
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
     Program::anim = nextAnimation;
 }
 
@@ -116,6 +148,7 @@ void pulseCallback(cmd* commandPointer) {
 
     Argument intArg = cmd.getArg("interval");
     Argument colorArg = cmd.getArg("color");
+    unsigned long transition = cmd.getArg("transition").getValue().toInt();
 
     unsigned long interval = intArg.getValue().toInt();
     String colorString =     colorArg.getValue();
@@ -128,7 +161,17 @@ void pulseCallback(cmd* commandPointer) {
         Program::color,
         interval
     );
-    // TRANSITION!!!!
+
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
 
     delete Program::anim;
     Program::anim = nextAnimation;
@@ -142,6 +185,7 @@ void waveCallback(cmd* commandPointer) {
     Argument intArg = cmd.getArg("interval");
     Argument widthArg = cmd.getArg("wavelength");
     Argument colorArg = cmd.getArg("color");
+    unsigned long transition = cmd.getArg("transition").getValue().toInt();
 
     unsigned long interval = intArg.getValue().toInt();
     double width =           widthArg.getValue().toDouble();
@@ -158,7 +202,17 @@ void waveCallback(cmd* commandPointer) {
         interval,
         width
     );
-    // TRANSITION!!!!
+
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
 
     delete Program::anim;
     Program::anim = nextAnimation;

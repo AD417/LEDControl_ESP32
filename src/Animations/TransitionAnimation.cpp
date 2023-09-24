@@ -15,9 +15,9 @@ TransitionAnimation::TransitionAnimation(
 void TransitionAnimation::blend(CRGB mainStrip[], CRGB otherStrip[], int len) {
     for (int i = 0; i < len; i++) {
         CRGB newColor = CRGB(
-            (int) (mainStrip[i].r * transitionPercent() + otherStrip[i].r * (1 - transitionPercent())),
-            (int) (mainStrip[i].g * transitionPercent() + otherStrip[i].g * (1 - transitionPercent())),
-            (int) (mainStrip[i].b * transitionPercent() + otherStrip[i].b * (1 - transitionPercent()))
+            (int) (otherStrip[i].r * transitionPercent() + mainStrip[i].r * (1 - transitionPercent())),
+            (int) (otherStrip[i].g * transitionPercent() + mainStrip[i].g * (1 - transitionPercent())),
+            (int) (otherStrip[i].b * transitionPercent() + mainStrip[i].b * (1 - transitionPercent()))
         );
         mainStrip[i] = newColor;
     }

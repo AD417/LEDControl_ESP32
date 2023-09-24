@@ -7,6 +7,8 @@
 #include "Program.h"
 #include "Animations/AlternatingAnimation.hpp"
 #include "Animations/FillAnimation.hpp"
+#include "Animations/PulseAnimation.hpp"
+#include "Animations/WaveAnimation.hpp"
 
 void altCallback(cmd* commandPointer) {
     Command cmd(commandPointer);
@@ -14,10 +16,6 @@ void altCallback(cmd* commandPointer) {
     Argument intArg = cmd.getArg("interval");
     Argument widthArg = cmd.getArg("width");
     Argument colorArg = cmd.getArg("color");
-
-    Serial.println(intArg.getValue());
-    Serial.println(widthArg.getValue());
-    Serial.println(colorArg.getValue());
 
     unsigned long interval = intArg.getValue().toInt();
     int width =              widthArg.getValue().toInt();
@@ -40,6 +38,27 @@ void altCallback(cmd* commandPointer) {
     Program::anim = nextAnimation;
 }
 
+void colorCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    String colorString = cmd.getArg("color").getValue();
+    Program::color = getColorFromString(colorString);
+
+    Program::anim->updateColorTo(Program::color);
+}
+
+void echoCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    int argCount = cmd.countArgs();
+
+    for (int i = 0; i < argCount; i++) {
+        Serial.print(cmd.getArg(i).getValue());
+        Serial.print(" ");
+    }
+    Serial.println("");
+}
+
 void fillCallback(cmd* commandPointer) {
     Command cmd(commandPointer);
 
@@ -51,6 +70,59 @@ void fillCallback(cmd* commandPointer) {
         Program::color
     );
     // TRANSITION!!!
+
+    delete Program::anim;
+    Program::anim = nextAnimation;
+}
+
+void pulseCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    Argument intArg = cmd.getArg("interval");
+    Argument colorArg = cmd.getArg("color");
+
+    unsigned long interval = intArg.getValue().toInt();
+    String colorString =     colorArg.getValue();
+
+    Program::color = getColorFromString(colorString);
+
+    if (interval < 500) interval = 500;
+
+    Animation * nextAnimation = new PulseAnimation(
+        Program::color,
+        interval
+    );
+    // TRANSITION!!!!
+
+    delete Program::anim;
+    Program::anim = nextAnimation;
+
+
+}
+
+void waveCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    Argument intArg = cmd.getArg("interval");
+    Argument widthArg = cmd.getArg("wavelength");
+    Argument colorArg = cmd.getArg("color");
+
+    unsigned long interval = intArg.getValue().toInt();
+    double width =           widthArg.getValue().toDouble();
+    String colorString =     colorArg.getValue();
+
+    Program::color = getColorFromString(colorString);
+    // TRANSITION!
+
+    if (interval < 50) interval = 50;
+    if (width < 2.0) width = 5.0;
+
+    Animation * nextAnimation = new WaveAnimation(
+        Program::color,
+        interval,
+        width
+    );
+    // TRANSITION!!!!
 
     delete Program::anim;
     Program::anim = nextAnimation;

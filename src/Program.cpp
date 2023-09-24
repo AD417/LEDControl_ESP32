@@ -5,6 +5,6 @@ namespace Program {
 Animation * anim;
 CRGB leds[NUM_LEDS];
 
-CRGB color = CRGB::White;
+CRGB color = CRGB::Black;
 
 }

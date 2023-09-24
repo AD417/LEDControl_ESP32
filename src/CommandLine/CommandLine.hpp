@@ -9,7 +9,8 @@ void initCommandLine();
 extern Command altCommand;
 extern Command echoCommand;
 extern Command fillCommand;
-extern Command fillCommand;
+extern Command flashCommand;
+extern Command killCommand;
 extern Command pulseCommand;
 extern Command waveCommand;
 // etc

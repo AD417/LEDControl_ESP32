@@ -9,6 +9,7 @@ Command altCommand = commandLine.addCommand("alt/ernate", altCallback);
 Command colorCommand = commandLine.addCommand("c/olor", colorCallback);
 Command echoCommand = commandLine.addBoundlessCmd("echo", echoCallback);
 Command fillCommand = commandLine.addCommand("fill,on", fillCallback);
+Command flashCommand = commandLine.addCommand("flash", flashCallback);
 Command killCommand = commandLine.addCommand("kill/off", killCallback);
 Command pulseCommand = commandLine.addCommand("pulse", pulseCallback);
 Command waveCommand = commandLine.addCommand("wave", waveCallback);
@@ -29,6 +30,11 @@ void initCommandLine() {
 
     fillCommand.addArgument("c,color", "");
     // TRANSITION!
+
+    flashCommand.addPositionalArgument("duration", "500");
+    flashCommand.addArgument("c,color", "");
+    flashCommand.addFlagArgument("k/ill");
+    // RECURSION!
 
     pulseCommand.addPositionalArgument("interval", "500");
     pulseCommand.addArgument("c,color", "");

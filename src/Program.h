@@ -15,7 +15,9 @@ extern Animation* anim;
 extern CRGB leds[NUM_LEDS];
 
 extern CRGB color;
+extern CRGB flashColor;
 
+extern bool isInterrupted;
 
 // </namespace Program>
 }

@@ -22,6 +22,13 @@ void loop() {
   Program::anim->applyTo(Program::leds, NUM_LEDS);
   FastLED.show();
 
+  if (Program::isInterrupted && Program::anim->isComplete()) {
+    Animation * nextAnimation = Program::anim->nextAnimation();
+    delete Program::anim;
+    Program::anim = nextAnimation;
+    Program::isInterrupted = false;
+  }
+
   if (Serial.available()) {
     // Read out string from the serial monitor
     String input = Serial.readStringUntil('\n');

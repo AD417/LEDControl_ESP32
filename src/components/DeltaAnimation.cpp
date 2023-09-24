@@ -41,13 +41,12 @@ Animation *DeltaAnimation::nextAnimation() {
 }
 
 void DeltaAnimation::applyTo(CRGB strip[], int len) {
-    CRGB mainStrip[len];
     CRGB otherStrip[len];
 
-    this->mainAnimation->applyTo(mainStrip, len);
+    this->mainAnimation->applyTo(strip, len);
     this->otherAnimation->applyTo(otherStrip, len);
 
-    this->blend(mainStrip, otherStrip, len);
+    this->blend(strip, otherStrip, len);
 }
 
 

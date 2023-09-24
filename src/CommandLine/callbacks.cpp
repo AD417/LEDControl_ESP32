@@ -7,6 +7,7 @@
 #include "Program.h"
 #include "Animations/AlternatingAnimation.hpp"
 #include "Animations/FillAnimation.hpp"
+#include "Animations/FlashAnimation.hpp"
 #include "Animations/KillAnimation.hpp"
 #include "Animations/PulseAnimation.hpp"
 #include "Animations/WaveAnimation.hpp"
@@ -74,6 +75,33 @@ void fillCallback(cmd* commandPointer) {
 
     delete Program::anim;
     Program::anim = nextAnimation;
+}
+
+void flashCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    unsigned long duration = cmd.getArg("duration").getValue().toInt();
+    String colorString = cmd.getArg("color").getValue();
+    bool killAfter = cmd.getArg("kill").isSet();
+
+    Program::flashColor = getColorFromString(colorString, true);
+
+    Animation * nextAnimation;
+    if (killAfter) {
+        nextAnimation = new KillAnimation();
+        delete Program::anim;
+    } else {
+        nextAnimation = Program::anim;
+    }
+
+    Animation * flashAnim = new FlashAnimation(
+        duration, 
+        Program::flashColor, 
+        nextAnimation
+    );
+
+    Program::anim = flashAnim;
+    Program::isInterrupted = true;
 }
 
 void killCallback(cmd* commandPointer) {

@@ -51,17 +51,19 @@ void initColors() {
     COLOR_SHORTHAND["y"] = "yellow";
 }
 
-CRGB getColorFromString(String color) {
+CRGB getColorFromString(String color, bool isFlash = false) {
+    CRGB defaultColor = Program::color;
+    if (isFlash) defaultColor = Program::flashColor;
     if (color.length() == 1) {
         try {
             color = COLOR_SHORTHAND.at(color);
         } catch (const std::out_of_range& e) {
-            return Program::color;
+            return defaultColor;
         }
     }
     try {
         return COLORS.at(color);
     } catch (const std::out_of_range& e) {
-        return Program::color;
+        return defaultColor;
     }
 }

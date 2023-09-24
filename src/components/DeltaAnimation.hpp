@@ -2,7 +2,8 @@
 
 #include "Animation.hpp"
 
-class DeltaAnimation : public Animation {
+class DeltaAnimation : public Animation 
+{
 public: 
     DeltaAnimation(
         Animation * mainAnimation, 

@@ -1,6 +1,6 @@
 #pragma once
 
-#define NUM_LEDS 100
+#define NUM_LEDS 500
 
 #include <memory>
 #include <FastLED.h>

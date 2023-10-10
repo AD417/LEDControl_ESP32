@@ -18,6 +18,7 @@ void setup() {
   initCommandLine();
   initServer();
   delay(500);
+  Serial.println("----- COMMAND LINE SUCCESSFULLY REBOOTED -----");
 }
 
 void loop() {

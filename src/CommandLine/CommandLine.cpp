@@ -14,6 +14,8 @@ Command killCommand = commandLine.addCommand("kill/off", killCallback);
 Command pulseCommand = commandLine.addCommand("pulse", pulseCallback);
 Command waveCommand = commandLine.addCommand("wave", waveCallback);
 
+Command xAltCommand = commandLine.addCommand("xalt/ernate", xAltCallback);
+
 void initCommandLine() {
 
     commandLine.setOnError(errorCallback); // Set error Callback
@@ -42,10 +44,12 @@ void initCommandLine() {
     pulseCommand.addPositionalArgument("interval", "500");
     pulseCommand.addArgument("c,color", "");
     pulseCommand.addArgument("t/ransition", "0");
-    // TRANSITION!
 
     waveCommand.addPositionalArgument("interval", "500");
     waveCommand.addPositionalArgument("wavelength", "5.0");
     waveCommand.addArgument("c,color", "");
+    waveCommand.addArgument("t/ransition", "0");
+
+    xAltCommand.addPositionalArgument("interval", "500");
     waveCommand.addArgument("t/ransition", "0");
 }

@@ -13,6 +13,8 @@
 #include "Animations/TransitionAnimation.hpp"
 #include "Animations/WaveAnimation.hpp"
 
+#include "Christmas/FestiveAltAnimation.h"
+
 void altCallback(cmd* commandPointer) {
     Command cmd(commandPointer);
 
@@ -211,6 +213,32 @@ void waveCallback(cmd* commandPointer) {
     } else {
         delete Program::anim;
     }
+    Program::anim = nextAnimation;
+}
+
+void xAltCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    Argument intArg = cmd.getArg("interval");
+    Argument transArg = cmd.getArg("transition");
+
+    unsigned long interval =   intArg.getValue().toInt();
+    unsigned long transition = transArg.getValue().toInt();
+
+    if (interval < 50) interval = 500;
+
+    Animation * nextAnimation = new FestiveAltAnimation(interval);
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
+
     Program::anim = nextAnimation;
 }
 

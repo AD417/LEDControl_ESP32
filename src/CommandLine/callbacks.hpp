@@ -8,7 +8,8 @@ void flashCallback(cmd* commandPointer);
 void killCallback(cmd* commandPointer);
 void pulseCallback(cmd* commandPointer);
 void waveCallback(cmd* commandPointer);
-// etc
 
+void xAltCallback(cmd* commandPointer);
+// etc
 
 void errorCallback(cmd_error* e);

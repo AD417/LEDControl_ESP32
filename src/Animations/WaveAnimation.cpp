@@ -8,7 +8,7 @@ WaveAnimation::WaveAnimation(
     unsigned long frameInterval,
     double wavelength
 ) : WaveAnimation(color, frameInterval) {
-    this->frameInterval = frameInterval;
+    this->wavelength = wavelength;
 } 
 
 WaveAnimation::WaveAnimation(

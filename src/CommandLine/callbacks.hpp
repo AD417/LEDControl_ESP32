@@ -10,6 +10,7 @@ void pulseCallback(cmd* commandPointer);
 void waveCallback(cmd* commandPointer);
 
 void xAltCallback(cmd* commandPointer);
+void xWaveCallback(cmd* commandPointer);
 // etc
 
 void errorCallback(cmd_error* e);

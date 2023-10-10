@@ -14,6 +14,7 @@
 #include "Animations/WaveAnimation.hpp"
 
 #include "Christmas/FestiveAltAnimation.h"
+#include "Christmas/FestiveTwinkleAnimation.h"
 
 void altCallback(cmd* commandPointer) {
     Command cmd(commandPointer);
@@ -239,6 +240,37 @@ void xAltCallback(cmd* commandPointer) {
         delete Program::anim;
     }
 
+    Program::anim = nextAnimation;
+}
+
+void xWaveCallback(cmd* commandPointer) {
+    Command cmd(commandPointer);
+
+    Argument intArg = cmd.getArg("interval");
+    Argument widthArg = cmd.getArg("wavelength");
+    unsigned long transition = cmd.getArg("transition").getValue().toInt();
+
+    unsigned long interval = intArg.getValue().toInt();
+    double width =           widthArg.getValue().toDouble();
+
+    if (interval < 50) interval = 50;
+    if (width < 2.0) width = 5.0;
+
+    Animation * nextAnimation = new FestiveTwinkleAnimation(
+        interval,
+        width
+    );
+
+    if (transition != 0) {
+        nextAnimation = new TransitionAnimation(
+            Program::anim,
+            nextAnimation,
+            transition
+        );
+        Program::isInterrupted = true;
+    } else {
+        delete Program::anim;
+    }
     Program::anim = nextAnimation;
 }
 

@@ -15,6 +15,7 @@ Command pulseCommand = commandLine.addCommand("pulse", pulseCallback);
 Command waveCommand = commandLine.addCommand("wave", waveCallback);
 
 Command xAltCommand = commandLine.addCommand("xalt/ernate", xAltCallback);
+Command xWaveCommand = commandLine.addCommand("xwave,twinkle", xWaveCallback);
 
 void initCommandLine() {
 
@@ -51,5 +52,11 @@ void initCommandLine() {
     waveCommand.addArgument("t/ransition", "0");
 
     xAltCommand.addPositionalArgument("interval", "500");
-    waveCommand.addArgument("t/ransition", "0");
+    xAltCommand.addArgument("t/ransition", "0");
+
+
+
+    xWaveCommand.addPositionalArgument("interval", "300");
+    xWaveCommand.addPositionalArgument("wavelength", "3.0");
+    xWaveCommand.addArgument("t/ransition", "0");
 }

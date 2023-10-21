@@ -24,6 +24,7 @@ std::unordered_map<String, String, StringHash, StringEqual> COLOR_SHORTHAND;
 void initColors() {
     COLORS["black"] = CRGB::Black;
     COLORS["blue"] = CRGB::Blue;
+    COLORS["cyan"] = CRGB::Cyan;
     COLORS["daytime"] = CRGB::LightCoral;
     COLORS["green"] = CRGB::Green;
     COLORS["magenta"] = CRGB::Magenta;
@@ -36,7 +37,7 @@ void initColors() {
     COLORS["yellow"] = CRGB::Yellow;
 
     COLOR_SHORTHAND["b"] = "blue";
-    // COLOR_SHORTHAND["c"] = "custom";
+    COLOR_SHORTHAND["c"] = "cyan";
     COLOR_SHORTHAND["d"] = "daytime";
     COLOR_SHORTHAND["g"] = "green";
     // Collision with magenta.

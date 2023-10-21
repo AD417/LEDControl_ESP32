@@ -37,7 +37,6 @@ void FestiveTwinkleAnimation::applyTo(CRGB strip[], int len) {
         // Bruh, no double % double?
         double offset = std::fmod(i + frame, this->wavelength);
         double percent = percentage(offset);
-        // if (i == 1) Serial.println(percent);
         // XXX: Multiplication of CRGB and double does not do what you expect!!!
         CRGB currentColor = CRGB(
             (int) (baseColor.r * percent),

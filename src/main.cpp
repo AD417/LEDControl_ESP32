@@ -12,7 +12,7 @@
 void setup() {
   // put your setup code here, to run once:
   FastLED.addLeds<WS2811, 12, RGB>(Program::leds, NUM_LEDS);
-  Serial.begin(9600);
+  Serial.begin(115200);
   Program::anim = new KillAnimation();
   initColors();
   initCommandLine();
